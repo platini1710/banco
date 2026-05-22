@@ -1,5 +1,5 @@
 # Diseñé y desarrollé el Core Banking para un sistema de gestión de cuentas corrientes, 
-implementando una arquitectura de microservicios altamente escalable sobre Spring Cloud y Java 21. 
+implementando una arquitectura de microservicios altamente escalable sobre Spring Cloud,hibernate 6,Spring Boot 3.2 y Java 21. 
 Para cumplir con los exigentes Acuerdos de Nivel de Servicio (SLA) del sector financiero y 
 soportar miles de transacciones por minuto, habilité el modelo de hilos virtuales de Project Loom (spring.threads.virtual.enabled=true),
  optimizando drásticamente el rendimiento en operaciones de entrada/salida (I/O).

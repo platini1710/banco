@@ -1,0 +1,7 @@
+services:
+  service-bank:
+    build: .
+    container_name: banco-bci.container
+    ports:
+      - "8080:8080" # Ajusta los puertos según corresponda
+    restart: always # Si la máquina se reinicia, el contenedor también lo hará

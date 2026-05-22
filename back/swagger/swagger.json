@@ -1,0 +1,169 @@
+openapi: 3.0.3
+
+servers:
+  - url: http://localhost
+
+paths:
+  /consulta/usuarios/allUsuarios:
+    get:
+      tags:
+        - allUsuarios
+      summary: consulta los usuarios existente
+      description: consulta los usuarios existente
+      operationId: allUsuariosx
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespuestaDTO'      
+        '500':
+          description: ocurrio exception
+  /consulta/usuarios/login/{id}:
+    get:
+      tags:
+        - usuarioId
+      summary: obtiene un usuario
+      description: obtiene datos de un usuario
+      operationId: getUsuario
+      parameters:
+        - name: id
+          in: path
+          description: ID es el rut usuario
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDTO'   
+        '400':
+          description: Invalid input
+        '500':
+          description: Validation exception
+  /registro/usuario/sign-up:
+    post:
+      tags:
+        - sign-up
+      summary: guarda dato de un usuario
+      description: guarda datos de un usuario
+      operationId: saveUsuario
+      requestBody:
+        description: Create a new pet in the store
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDTO'
+        required: true              
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RespuestaDTO'          
+        '400':
+          description: parametro invalido
+        '417':
+          description: error al grabar
+        '500':
+          description: se lanza exception         
+components:
+  schemas:
+    RespuestaDTO:
+      type: object
+      properties:
+        msg:
+          type: string
+          example: succesfull
+        uuid:
+          type: string
+          example: 377a160b-57f4-374d-8e26-ebe81e555cc9"
+        name:
+          type: string
+          example: augusto
+        password:
+          type: string
+          example: aA123aA$@456
+        email:
+          type: string
+          description: email del usuario
+          example: aaa@gmail.com
+        created:
+          type: string
+          description: fecha de creacion del registro
+          example: 17-08-2008   
+        errorResp:
+          type: object
+          description: objeto con error
+        lastLogin:
+          type: string
+          description: ultimo login que se logueo
+          example: xxxaaa
+        token:
+          type: string
+          description: token que se genera para despues hacer la consulta
+          example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiYXVndXN0byAiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzEyNzY3OTMwLCJleHAiOjE3MTI3Njg1MzB9.Z9jvxC2NdeI8lKsIdsjXJrjKsm5-a_tVRlECzr4neMw
+        isActive:
+          type: string
+          description: boolean si esta activo es true sino false
+          example: false
+        phone:
+          $ref: '#/components/schemas/PhoneDTO'
+          description: objeto co datos del telefono del usuario
+
+    UsuarioDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: succesfull
+        name:
+          type: string
+          example: augusto
+        password:
+          type: string
+          example: aA123aA$@456
+        email:
+          type: string
+          description: email del usuario
+          example: aaa@gmail.com
+        created:
+          type: string
+          description: fecha de creacion del registro
+          example: 17-08-2008   
+        lastLogin:
+          type: string
+          description: ultimo login que se logueo
+          example: xxxaaa
+        token:
+          type: string
+          description: token que se genera para despues hacer la consulta
+          example: Bearer eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiJzb2Z0dGVrSldUIiwic3ViIjoiYXVndXN0byAiLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiaWF0IjoxNzEyNzY3OTMwLCJleHAiOjE3MTI3Njg1MzB9.Z9jvxC2NdeI8lKsIdsjXJrjKsm5-a_tVRlECzr4neMw
+        isActive:
+          type: string
+          description: boolean si esta activo es true sino false
+          example: false
+        phone:
+          $ref: '#/components/schemas/PhoneDTO'
+          description: objeto co datos del telefono del usuario
+        
+    PhoneDTO:
+      type: object
+      properties:
+        id:
+          type: string
+          example: 100000
+        number:
+          type: integer
+          example: 12332
+        cityCode:
+          type: string

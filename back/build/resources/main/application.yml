@@ -1,0 +1,53 @@
+
+# ===============================
+# 1. CONEXIÓN A LA BASE DE DATOS (MV1)
+# ===============================
+# Reemplaza IP_PRIVADA_MV1 por la IP real interna de tu máquina de base de datos
+
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/motor_fraude_db
+    username: admin_app
+    password: admin
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  application:
+    name: banco-bci
+
+
+  # CONFIGURACIÓN DE INICIALIZACIÓN (Clave para tu data.sql)
+  sql:
+    init:
+      mode: always #
+  # 2. Configuración de Hibernate 6
+  jpa:
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+          format_sql: true
+          generate_statistics: true
+  # 3. Optimización de Java 21
+  threads:
+    virtual:
+      enabled: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+logging:
+  level:
+    org.hibernate.stat: debug
+    org.hibernate.type: trace
+
+server:
+  port: 8083
+
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+
+patron:
+  password: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$"

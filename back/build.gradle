@@ -1,0 +1,71 @@
+plugins {
+    id 'org.springframework.boot' version '3.3.0'
+    id 'io.spring.dependency-management' version '1.1.5'
+    id 'java'
+    id 'idea'
+    id 'maven-publish'
+}
+
+group = 'com.bci.tareas'
+version = '1.0-SNAPSHOT'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+// Configuración de empaquetado específica de Spring Boot
+bootJar {
+    archiveFileName = 'app.jar'
+    mainClass = 'com.bci.tareas.SpringBootRest2Application'
+}
+
+dependencies {
+    // Spring Boot Starter Core
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+
+    // Documentación
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
+
+    // Persistencia y Datos
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    runtimeOnly 'com.mysql:mysql-connector-j'
+    runtimeOnly 'com.h2database:h2'
+
+    // Seguridad JWT (Versión estable)
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
+
+    // Utilidades
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    // Testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    // Necesario para la ejecución de tests en Gradle 8/9
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
+
+// Opcional: Si necesitas la tarea de copia, regístrala de forma segura al final
+tasks.register("copyTask", Copy) {
+    from layout.buildDirectory.dir("reports")
+    into layout.buildDirectory.dir("1")
+    mustRunAfter tasks.named('test')
+}

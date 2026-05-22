@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.bci.tareas.test.EmailValidatorTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2026-05-21T02:47:30" hostname="LENOVO" time="0.054">
+  <properties/>
+  <testcase name="#1 - Run test with email = hello@example.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.032"/>
+  <testcase name="#2 - Run test with email = hello@example.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <testcase name="#3 - Run test with email = hello|@example.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <testcase name="#4 - Run test with email = emah@chile.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <testcase name="#5 - Run test with email = hss@bci.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <testcase name="#6 - Run test with email = aespinoza@gmail.com" classname="com.bci.tareas.test.EmailValidatorTest" time="0.0"/>
+  <testcase name="#1 - Run test with email = hello@bci" classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <testcase name="#2 - Run test with email = hello@ " classname="com.bci.tareas.test.EmailValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

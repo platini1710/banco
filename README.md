@@ -19,6 +19,6 @@ soportar miles de transacciones por minuto, habilité el modelo de hilos virtual
 
 pueden revisar en código back en la carpeta Backend y el Front en la carpeta fronReact
 
-**AUTOR: AUGUSTO ESPINOZA**\n
+**AUTOR: AUGUSTO ESPINOZA**  
 **PROYECTO :CUENTA CORRIENTE BANCO**
 

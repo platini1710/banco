@@ -1,0 +1,27 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: api-gateway
+  # ESTA ES LA LÍNEA QUE FALTA:
+  config:
+    import: "optional:configserver:http://localhost:8888"
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server:8761/eureka/
+  instance:
+    prefer-ip-address: true
+   #hostname: localhost       Fuerza a que el nombre sea localhost
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"  # Esto habilita TODOS los paneles para desarrollo
+  endpoint:
+    gateway:
+      access: unrestricted

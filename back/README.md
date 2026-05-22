@@ -1,8 +1,5 @@
- 1.- Para bajar el proyecto, copie el siguiente comando en la linea de comando:
- 
-      git clone https://github.com/platini1710/bci.git
 	  
-2.-	Para probar los test unitario y de integracion debe colocar el siguiente comando
+1.-	Para probar los test unitario y de integracion debe colocar el siguiente comando
 
       gradlew check run
 	  

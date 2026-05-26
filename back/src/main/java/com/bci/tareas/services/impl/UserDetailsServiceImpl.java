@@ -75,7 +75,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                     logger.info("✅ Usuario rolSeguro  {}",
                             rolSeguro);
                     // 4. Verificamos el estado de la cuenta
-                    boolean cuentaActiva = (user.getActivo() == EstadoActivo.ACTIVO);
+                    boolean cuentaActiva = (user.getActivo().getValorDb() == EstadoActivo.ACTIVA.getValorDb());
                     if (!cuentaActiva) {
                         logger.warn("⚠️ El usuario RUT {} está inactivo en la base de datos.", user.getRut());
                     }

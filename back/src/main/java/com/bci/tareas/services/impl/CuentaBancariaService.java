@@ -1,9 +1,12 @@
 package com.bci.tareas.services.impl;
 import com.bci.tareas.controllers.ControllerConsulta;
+import com.bci.tareas.dto.CuentaConSobregiroDTO;
 import com.bci.tareas.exception.RecursoNoEncontradoException;
 import com.bci.tareas.model.CuentaBancaria;
 import com.bci.tareas.model.Usuario;
+import com.bci.tareas.model.enums.EstadoActivo;
 import com.bci.tareas.model.enums.EstadoCuentaBancaria;
+import com.bci.tareas.model.enums.EstadoSobregiro;
 import com.bci.tareas.repositorio.CuentaBancariaRepository;
 import com.bci.tareas.repositorio.UsuarioRepository;
 import jakarta.persistence.LockModeType;
@@ -52,7 +55,7 @@ public class CuentaBancariaService {
         // 4. Guardamos (al terminar el método, Spring Boot libera el bloqueo de MySQL automáticamente)
         cuentaBancariaRepository.save(cuenta);
     }
-    public List<CuentaBancaria> obtenerCuentasPorRut(Long rut) {
+    public List<CuentaConSobregiroDTO> obtenerCuentasPorRut(Long rut) {
 
         logger.info("obtenerCuentasPorRut rut" + rut);
         Usuario usuario = usuarioRepository.findByRut(rut)
@@ -61,7 +64,8 @@ public class CuentaBancariaService {
 
         Long idUsuario = usuario.getIdUsuario().longValue();
 
-        return cuentaBancariaRepository.findByUsuario_IdUsuario(idUsuario);
+        return cuentaBancariaRepository.findCuentasConSobregiroByUsuario(idUsuario );
     }
+
 
   }

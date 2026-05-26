@@ -25,6 +25,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
+        String userId = request.getHeader("X-User-Id");
+        System.out.println("userId ::" +userId);
 
         final String authHeader = request.getHeader("Authorization");
         logger.info("Header recibido: " + authHeader); // Si esto sale null en la consola, Postman no está enviando el token

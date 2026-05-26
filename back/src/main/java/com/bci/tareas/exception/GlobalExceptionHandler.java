@@ -1,6 +1,9 @@
 package com.bci.tareas.exception;
 
+import com.bci.tareas.controllers.AvanceController;
 import com.bci.tareas.helper.Constantes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -13,6 +16,8 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
+
     @ExceptionHandler(RecursoNoEncontradoException.class)
     public ResponseEntity<Map<String, String>> handleNotFound(RecursoNoEncontradoException ex) {
         Map<String, String> respuesta = new HashMap<>();
@@ -61,5 +66,25 @@ public class GlobalExceptionHandler {
         respuesta.put("mensaje", ex.getMessage());
         return new ResponseEntity<>(respuesta, HttpStatus.UNPROCESSABLE_ENTITY); // 404 Bad Request.
     }
+    @ExceptionHandler(SobreGiroException.class)
+    public ResponseEntity<Map<String, String>> handleNotFound(SobreGiroException ex) {
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("mensaje", ex.getMessage());
+        respuesta.put("error", "Sobregiro");
+        return new ResponseEntity<>(respuesta, HttpStatus.NOT_FOUND); // 404 Bad Request.
+    }
 
+    // Captura errores internos inesperados (Error 500)
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<Map<String, String>> manejarErrorGeneral(Exception ex) {
+        // Logueamos el error real para que tú lo veas en el servidor
+        logger.error("Error inesperado en el sistema: ", ex);
+        Map<String, String> respuesta = new HashMap<>();
+        respuesta.put("mensaje", ex.getMessage());
+        respuesta.put("error", "Error inesperado");
+        // Devolvemos un mensaje genérico al usuario final
+
+        return new ResponseEntity<>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR); // 404 Bad Request.
+
+    }
 }

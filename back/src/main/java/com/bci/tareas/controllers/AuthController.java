@@ -13,7 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RestController
 @RequestMapping("/consulta/usuario")
 
@@ -44,6 +44,7 @@ public class AuthController {
         // Si la ejecución llega aquí, significa que el usuario existe en la BD
         // 2. Si existe y es válido, se genera el JWT usando el JwtService
         RespuestaDTO response=new RespuestaDTO();
+
         response.setToken(jwtService.generateToken(authentication.getName()));
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);

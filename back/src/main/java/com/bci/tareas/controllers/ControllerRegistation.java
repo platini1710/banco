@@ -23,7 +23,6 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 
-@CrossOrigin(origins = "http://localhost:5173")
 
 @RestController
 @RequestMapping("/registro/usuario")

@@ -2,7 +2,7 @@ package com.bci.tareas.model.enums;
 
 public enum EstadoActivo {
     INACTIVO(0),
-    ACTIVO(1);
+    ACTIVA(1);
 
     private final Integer valorDb;
 

@@ -32,7 +32,7 @@ public class UsuarioService {
     public Usuario registrarNuevoUsuario(Usuario nuevoUsuario, String observacionInicial) {
 
         // PASO 1: Por regla de negocio de tu tabla, al nacer el usuario está activo
-        nuevoUsuario.setActivo(EstadoActivo.ACTIVO);
+        nuevoUsuario.setActivo(EstadoActivo.ACTIVA);
 
         // PASO 2: Guardamos el Usuario.
         // IMPORTANTE: Al hacer el save(), Spring Data y MySQL le asignan el ID

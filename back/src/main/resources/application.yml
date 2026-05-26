@@ -40,7 +40,9 @@ logging:
   level:
     org.hibernate.stat: debug
     org.hibernate.type: trace
-
+    org:
+      springframework:
+        security: TRACE
 server:
   port: 8083
 
@@ -51,3 +53,20 @@ management:
 
 patron:
   password: "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$"
+
+resilience4j:
+  circuitbreaker:
+    instances:
+      registroCivilService:
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 10          # Revisa las últimas 10 llamadas
+        failureRateThreshold: 50       # Si el 50% o más falla, abre el circuito
+        slowCallRateThreshold: 75      # Si el 75% tarda más de lo normal, también abre
+        slowCallDurationThreshold: 2s  # Una llamada se considera "lenta" si pasa los 2 segundos
+        waitDurationInOpenState: 15s   # Espera 15 segundos antes de pasar a HALF_OPEN para probar
+
+  retry:
+    instances:
+      registroCivilService:
+        maxAttempts: 3                 # Intenta hasta 3 veces antes de darte por vencido
+        waitDuration: 500ms            # Espera medio segundo entre reintentos

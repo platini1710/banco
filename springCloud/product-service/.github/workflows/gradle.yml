@@ -1,0 +1,32 @@
+name: Spring Boot CI - Test (Gradle)
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 1. Descargar el código
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      # 2. Configurar Java JDK
+      - name: Configurar Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17' # Cambia según tu versión de Java
+          cache: 'gradle'
+
+      # 3. Dar permisos de ejecución a Gradle Wrapper
+      - name: Dar permisos a gradlew
+        run: chmod +x gradlew
+
+      # 4. Ejecutar pruebas con Gradle
+      - name: Ejecutar pruebas con Gradle
+        run: ./gradlew test

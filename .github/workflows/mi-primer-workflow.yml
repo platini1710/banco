@@ -1,0 +1,18 @@
+name: Laboratorio Hola Mundo
+
+# Define cuándo se va a ejecutar la acción
+on: [push]
+
+# Define qué tareas va a realizar
+jobs:
+  saludo:
+    runs-on: ubuntu-latest # Utiliza un servidor virtual con Linux
+    steps:
+      - name: Paso 1 - Descargar el código del repositorio
+        uses: actions/checkout@v4
+
+      - name: Paso 2 - Imprimir un saludo en la consola
+        run: echo "¡Hola! Mi primer GitHub Action se ha ejecutado con éxito."
+
+      - name: Paso 3 - Mostrar la fecha actual
+        run: date

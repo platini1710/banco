@@ -32,3 +32,11 @@ jobs:
       - name: Ejecutar pruebas con Gradle
         run: ./gradlew test
         working-directory: ./back
+
+      # 5. Subir reporte de pruebas en formato HTML
+      - name: Subir reporte de pruebas
+        if: always() # Se ejecuta aunque fallen las pruebas para que puedas revisarlas
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-report
+          path: ./back/build/reports/tests/test/

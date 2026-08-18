@@ -1,19 +1,34 @@
-name: Laboratorio Hola Mundo
+name: Spring Boot CI - Test (Gradle)
 
-# Define cuándo se va a ejecutar la acción
-on: [push]
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
 
-# Define qué tareas va a realizar
 jobs:
-  saludo:
-    runs-on: ubuntu-latest # Utiliza un servidor virtual con Linux
+  build-and-test:
+    runs-on: ubuntu-latest
+
     steps:
-      - name: Paso 1 - Descargar el código del repositorio
+      # 1. Descargar el código
+      - name: Checkout del código
         uses: actions/checkout@v4
 
-      - name: Paso 2 - Imprimir un saludo en la consola
-        run: echo "¡Hola! Mi primer GitHub Action se ha ejecutado con éxito."
+      # 2. Configurar Java JDK
+      - name: Configurar Java JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+          cache: 'gradle'
 
-      - name: Paso 3 - Mostrar la fecha actual
-        run: date
-   
+      # 3. Dar permisos de ejecución a Gradle Wrapper (especificando la ruta)
+      - name: Dar permisos a gradlew
+        run: chmod +x gradlew
+        working-directory: springCloud/product-service
+
+      # 4. Ejecutar pruebas con Gradle (especificando la ruta)
+      - name: Ejecutar pruebas con Gradle
+        run: ./gradlew test
+        working-directory: springCloud/product-service

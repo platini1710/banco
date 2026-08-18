@@ -26,7 +26,7 @@ jobs:
       # 3. Dar permisos de ejecución a Gradle Wrapper (especificando la ruta)
       - name: Dar permisos a gradlew
         run: chmod +x gradlew
-        working-directory: springCloud/product-service
+        working-directory: ./springCloud/product-service
 
       # 4. Ejecutar pruebas con Gradle (especificando la ruta)
       - name: Ejecutar pruebas con Gradle
